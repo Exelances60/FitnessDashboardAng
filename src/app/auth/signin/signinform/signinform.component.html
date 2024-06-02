@@ -1,0 +1,48 @@
+<div class="w-full md:w-1/2 p-5 md:p-0">
+  <h1 class="text-3xl font-bold text-center">Sign In</h1>
+  <form
+    [formGroup]="signInForm"
+    class="mt-5 flex flex-col gap-2"
+    nz-form
+    [nzAutoTips]="autoTip"
+    (ngSubmit)="submitForm()"
+  >
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="mail" class="rounded-lg p-2">
+          <input
+            type="text"
+            nz-input
+            formControlName="email"
+            placeholder="Username"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="lock" class="rounded-lg p-2">
+          <input
+            type="password"
+            nz-input
+            formControlName="password"
+            placeholder="Password"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button
+          nz-button
+          nzType="primary"
+          type="submit"
+          [nzLoading]="loading"
+          class="w-full rounded-lg"
+        >
+          Sign In
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
