@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-signinform',
@@ -21,7 +23,11 @@ export class SigninformComponent {
       minlength: 'Password must be at least 6 characters long',
     },
   };
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   submitForm(): void {
     if (this.signInForm.invalid) {
@@ -32,8 +38,8 @@ export class SigninformComponent {
       .login(this.signInForm.value.email, this.signInForm.value.password)
       .subscribe({
         next: (result: any) => {
-          console.log('Login successful');
-          console.log(result);
+          this.loading = false;
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.error(err);
