@@ -26,7 +26,8 @@ export class SigninformComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private message: NzMessageService
   ) {}
 
   submitForm(): void {
@@ -42,7 +43,8 @@ export class SigninformComponent {
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
-          console.error(err);
+          this.message.error(err.error.errorMessage || 'An error occurred');
+          this.signInForm.reset();
           this.loading = false;
         },
         complete: () => {

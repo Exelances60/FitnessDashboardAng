@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from '../../services/auth.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-signout',
@@ -8,15 +10,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrl: './signout.component.css',
 })
 export class SignoutComponent {
-  constructor(private cookieService: CookieService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
-  signout() {
-    this.cookieService.delete('token');
-    return this.router.navigate(['/auth/signin']);
-  }
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    this.signout();
+    this.authService.logout();
   }
 }
