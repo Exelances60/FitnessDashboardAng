@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
+import { userResolver } from '../resolvers/user.resolver';
 
-const routes: Routes = [{ path: '', component: DashboardHomeComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: DashboardHomeComponent,
+    resolve: {
+      userInfo: userResolver,
+    },
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

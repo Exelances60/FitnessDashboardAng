@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { map } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtServicesService } from './jwt-services.service';
+import { UserService } from './user.service';
 
 interface LoginResponse {
   token: string;

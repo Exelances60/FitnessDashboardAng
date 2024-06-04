@@ -20,7 +20,9 @@ export class JwtServicesService {
     return environment.jwt_secret;
   }
 
-  decodeToken(token: string): Record<string, any> {
+  decodeToken(
+    token: string = this.cookieService.get('token')
+  ): Record<string, any> {
     return jwtDecode(token);
   }
 
