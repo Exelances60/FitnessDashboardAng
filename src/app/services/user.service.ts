@@ -12,8 +12,13 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserInfo() {
-    return this.http.get<UserInfoResponse>(
-      `${environment.apiUrl}/auth/ownerInfo`
-    );
+    return this.http
+      .get<UserInfoResponse>(`${environment.apiUrl}/auth/ownerInfo`)
+      .pipe(
+        map((response) => {
+          this.$user.next(response.owner);
+          return response;
+        })
+      );
   }
 }

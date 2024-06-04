@@ -1,0 +1,31 @@
+<nz-avatar
+  [nzSize]="35"
+  nzIcon="user"
+  *ngIf="ImageUrl"
+  [nzSrc]="ImageUrl"
+  nz-dropdown
+  [nzDropdownMenu]="menu"
+  class="cursor-pointer"
+></nz-avatar>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu class="p-2 bg-white rounded-md shadow-lg border border-gray-200">
+    <li nz-menu-item class="py-2 px-4 hover:bg-gray-100 rounded-md">
+      <a
+        routerLink="/profile"
+        class="flex items-center text-gray-700 hover:text-gray-900"
+      >
+        <span nz-icon nzType="user" class="mr-2"></span>
+        Profile
+      </a>
+    </li>
+    <li nz-menu-item class="py-2 px-4 hover:bg-gray-100 rounded-md">
+      <a
+        routerLink="/auth/signout"
+        class="flex items-center text-gray-700 hover:text-gray-900"
+      >
+        <span nz-icon nzType="logout" nzTheme="outline" class="mr-2"></span>
+        Logout
+      </a>
+    </li>
+  </ul>
+</nz-dropdown-menu>

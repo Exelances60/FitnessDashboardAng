@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 import { tokenInterceptors } from '../middlewares/tokenMiddlewares';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 registerLocaleData(en);
 
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideNzI18n(en_US),
     importProvidersFrom(FormsModule),
+    importProvidersFrom(NzIconModule),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([tokenInterceptors])),
   ],

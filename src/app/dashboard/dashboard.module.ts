@@ -5,7 +5,7 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { SharedModule } from '../shared/shared.module';
+import { LayoutModule } from '../layout/layout.module';
 @NgModule({
   declarations: [DashboardHomeComponent],
   imports: [
@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     NzLayoutModule,
     NzIconModule,
     NzMenuModule,
-    SharedModule,
+    LayoutModule,
   ],
 })
 export class DashboardModule {}

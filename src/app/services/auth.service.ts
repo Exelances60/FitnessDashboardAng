@@ -25,7 +25,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private cookies: CookieService,
-    private jwtService: JwtServicesService
+    private jwtService: JwtServicesService,
+    private userService: UserService
   ) {}
 
   login(email: string, password: string) {
@@ -49,6 +50,7 @@ export class AuthService {
             false,
             'Strict'
           );
+          this.userService.getUserInfo().subscribe();
         })
       );
   }

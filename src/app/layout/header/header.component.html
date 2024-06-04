@@ -1,0 +1,10 @@
+<nz-spin
+  [nzSize]="'small'"
+  [nzTip]="'Loading...'"
+  [nzSpinning]="!ownerInfo"
+  class="w-full h-full"
+>
+  <div class="w-full flex justify-end items-center h-full">
+    <app-header-avatar [ImageUrl]="ownerInfo?.ownerImage"></app-header-avatar>
+  </div>
+</nz-spin>
