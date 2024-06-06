@@ -1,0 +1,15 @@
+<div class="bg-[#fff] rounded-lg shadow-md w-full p-4 flex flex-col gap-5">
+  <div class="flex justify-between items-center">
+    <h1 class="text-lg font-bold">Products</h1>
+    <app-button
+      [text]="'Add Product'"
+      [size]="'default'"
+      [ghost]="true"
+    ></app-button>
+  </div>
+  <app-products-table
+    [products]="datas"
+    [isLoading]="loading"
+    [totalProducts]="datas.length"
+  ></app-products-table>
+</div>

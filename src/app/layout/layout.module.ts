@@ -6,11 +6,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { HeaderAvatarComponent } from './header/header-avatar/header-avatar.component';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { CurrencyMenuComponent } from './header/currency-menu/currency-menu.component';
 
 @NgModule({
-  declarations: [HeaderComponent, HeaderAvatarComponent],
+  declarations: [HeaderComponent, HeaderAvatarComponent, CurrencyMenuComponent],
   imports: [
     CommonModule,
     NzButtonModule,
@@ -19,6 +21,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
     NzSpinModule,
     RouterLink,
     NzDropDownModule,
+    NzPopoverModule,
   ],
   exports: [HeaderComponent, HeaderAvatarComponent],
 })

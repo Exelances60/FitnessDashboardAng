@@ -1,10 +1,7 @@
-<nz-spin
-  [nzSize]="'small'"
-  [nzTip]="'Loading...'"
-  [nzSpinning]="!ownerInfo"
-  class="w-full h-full"
->
-  <div class="w-full flex justify-end items-center h-full">
-    <app-header-avatar [ImageUrl]="ownerInfo?.ownerImage"></app-header-avatar>
-  </div>
-</nz-spin>
+<div class="w-full flex gap-4 justify-end items-center h-full">
+  <app-currency-menu></app-currency-menu>
+  <app-header-avatar
+    [ImageUrl]="ownerInfo.ownerImage"
+    *ngIf="ownerInfo"
+  ></app-header-avatar>
+</div>

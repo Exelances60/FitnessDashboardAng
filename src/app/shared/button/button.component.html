@@ -1,0 +1,13 @@
+<button
+  nz-button
+  nzType="primary"
+  [nzSize]="size"
+  [nzLoading]="loading"
+  disabled="{{ disabled }}"
+  [nzGhost]="ghost"
+  [nzDanger]="danger"
+  (click)="onClick()"
+  class="rounded-lg shadow-sm"
+>
+  {{ text }}
+</button>

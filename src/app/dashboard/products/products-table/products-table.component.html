@@ -1,0 +1,47 @@
+<nz-table
+  #productsTable
+  [nzData]="products"
+  [nzLoading]="isLoading"
+  [nzPageSize]="5"
+  [nzTotal]="totalProducts"
+  class="w-full overflow-auto"
+  nzTableLayout="auto"
+  (nzCurrentPageDataChange)="currentPageDataChange($event)"
+>
+  <thead>
+    <tr>
+      <th *ngFor="let column of listOfColumms">
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of productsTable.data">
+      <td>
+        <img
+          [src]="data.imageUrl"
+          alt="product"
+          class="w-20 h-20 object-cover rounded-md hover:scale-105 transition-transform duration-300"
+        />
+      </td>
+      <td>{{ data.name }}</td>
+      <td>{{ data.price | currency : "TRY" }}</td>
+      <td>{{ data.amount }}</td>
+      <td>{{ data.category }}</td>
+      <td>
+        <div class="w-full flex items-center gap-2">
+          <app-button
+            [text]="'Edit'"
+            [size]="'default'"
+            [ghost]="true"
+          ></app-button>
+          <app-button
+            [text]="'Delete'"
+            [size]="'default'"
+            [danger]="true"
+          ></app-button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -14,7 +14,12 @@
       />
     </div>
     <ul nz-menu nzTheme="light" nzMode="inline">
-      <li nz-menu-item *ngFor="let item of navItems" nzMatchRouter>
+      <li
+        nz-menu-item
+        *ngFor="let item of navItems"
+        nzMatchRouter
+        [nzMatchRouterExact]="true"
+      >
         <span nz-icon [nzType]="item.icon"></span>
         <a [routerLink]="item.link" class="ml-2">{{ item.name }}</a>
       </li>
@@ -25,13 +30,9 @@
       <app-header></app-header>
     </nz-header>
     <nz-content style="margin: 24px 16px 0">
-      <div class="p-6 bg-[#fff] rounded-lg shadow-md min-h-[750px]">
-        <h1 class="text-3xl font-bold text-center">Dashboard Home</h1>
-        <p class="text-center">Welcome to the dashboard home page</p>
+      <div class="p-3 min-h-[750px] overflow-auto h-[831px]">
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
-    <nz-footer class="text-center"
-      >Ant Design ©2020 Implement By Angular</nz-footer
-    >
   </nz-layout>
 </nz-layout>
