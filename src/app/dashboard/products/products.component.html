@@ -6,7 +6,18 @@
       [size]="'default'"
       [ghost]="true"
     ></app-button>
+    <app-modal [isVisible]="true" [customFooter]="true">
+      <ng-container customTitle>
+        <h1 class="text-lg font-bold">Add Product</h1>
+      </ng-container>
+      <ng-container customContent> asdasda </ng-container>
+      <ng-container customFooter>
+        <button nz-button nzType="default">Cancel</button>
+        <button nz-button nzType="primary">Save</button>
+      </ng-container>
+    </app-modal>
   </div>
+
   <app-products-table
     [products]="datas"
     [isLoading]="loading"

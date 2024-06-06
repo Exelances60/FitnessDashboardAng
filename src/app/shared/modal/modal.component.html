@@ -1,0 +1,17 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzContent]="modalContent"
+  [nzFooter]="modalFooter"
+  [nzTitle]="modalTitle"
+  (nzOnCancel)="handleCancel()"
+>
+  <ng-template #modalTitle>
+    <ng-content select="[customTitle]"> </ng-content>
+  </ng-template>
+  <ng-template #modalContent>
+    <ng-content select="[customContent]"> </ng-content>
+  </ng-template>
+  <ng-template #modalFooter>
+    <ng-content select="[customFooter]" *ngIf="customFooter"> </ng-content>
+  </ng-template>
+</nz-modal>
