@@ -12,12 +12,14 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ProductsTableComponent } from './products/products-table/products-table.component';
 import { SharedModule } from '../shared/shared.module';
+import { CurrencyCustomPipe } from '../pipes/currency.pipe';
 
 @NgModule({
   declarations: [
     DashboardHomeComponent,
     ProductsComponent,
     ProductsTableComponent,
+    CurrencyCustomPipe,
   ],
   imports: [
     RouterOutlet,
@@ -31,5 +33,6 @@ import { SharedModule } from '../shared/shared.module';
     NzPaginationModule,
     SharedModule,
   ],
+  providers: [CurrencyCustomPipe],
 })
 export class DashboardModule {}

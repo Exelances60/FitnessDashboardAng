@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LocalStorageService } from '../../../services/local-storage.service';
 
 @Component({
   selector: 'app-currency-menu',
@@ -6,9 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './currency-menu.component.css',
 })
 export class CurrencyMenuComponent {
+  constructor(private localStorageService: LocalStorageService) {}
   currentCurrency = localStorage.getItem('currency') || 'USD';
   currencyChange(currency: string): void {
-    localStorage.setItem('currency', currency);
     this.currentCurrency = currency;
+    this.localStorageService.setItem('currency', currency);
   }
 }

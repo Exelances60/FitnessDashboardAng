@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../../../interfaces/product-interface';
+import { LocalStorageService } from '../../../services/local-storage.service';
 interface ColumnItem {
   name: string;
   responsive?: string[];
@@ -11,6 +12,7 @@ interface ColumnItem {
   styleUrl: './products-table.component.css',
 })
 export class ProductsTableComponent {
+  currency = '';
   listOfColumms: ColumnItem[] = [
     {
       name: 'Image',
@@ -35,6 +37,11 @@ export class ProductsTableComponent {
   @Input() isLoading = false;
   @Input() products: Product[] = [];
   @Input() totalProducts = 0;
-  constructor() {}
+  constructor(private localStorageService: LocalStorageService) {
+    this.localStorageService.$cureny.subscribe((currency) => {
+      this.currency = currency;
+    });
+  }
+
   currentPageDataChange($event: readonly Product[]): void {}
 }
