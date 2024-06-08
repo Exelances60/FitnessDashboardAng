@@ -44,7 +44,6 @@ export class ProductsTableComponent {
   }
 
   onFilterByName(name: string): void {
-    this.nameFilter = false;
     this.displayData = this.products.filter(
       (product) => product.name.indexOf(name) !== -1
     );
