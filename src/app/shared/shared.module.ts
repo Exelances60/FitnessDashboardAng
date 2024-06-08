@@ -6,9 +6,16 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { ModalComponent } from './modal/modal.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { TableSearchComponent } from './table-search/table-search.component';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [ButtonComponent, ModalComponent, TableSearchComponent],
@@ -21,7 +28,32 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzDropDownModule,
     NzIconModule,
     NzInputModule,
+    NzLayoutModule,
+    NzMenuModule,
+    NzTableModule,
+    NzImageModule,
+    NzFormModule,
+    NzSelectModule,
+    NzUploadModule,
   ],
-  exports: [ButtonComponent, ModalComponent, TableSearchComponent],
+  exports: [
+    ButtonComponent,
+    ModalComponent,
+    TableSearchComponent,
+    CommonModule,
+    NzLayoutModule,
+    NzIconModule,
+    NzMenuModule,
+    NzTableModule,
+    NzDropDownModule,
+    NzImageModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzInputModule,
+    FormsModule,
+    NzButtonModule,
+    NzSelectModule,
+    NzUploadModule,
+  ],
 })
 export class SharedModule {}

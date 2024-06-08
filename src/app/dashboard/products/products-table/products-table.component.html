@@ -10,7 +10,14 @@
   <thead>
     <tr>
       <ng-container *ngFor="let column of listOfColumms">
-        <th *ngIf="column.name !== 'Product\'s Name'; else elseBlock">
+        <th
+          *ngIf="column.name !== 'Product\'s Name'; else elseBlock"
+          [nzSortFn]="$any(column.sortFn)"
+          [nzSortOrder]="$any(column.sortOrder)"
+          [nzSortDirections]="$any(column.sortDirections)"
+          [nzFilters]="$any(column.listOfFilter)"
+          [nzFilterFn]="$any(column.filterFn)"
+        >
           {{ column.name }}
         </th>
         <ng-template #elseBlock>
@@ -31,9 +38,12 @@
     <tr *ngFor="let data of productsTable.data">
       <td>
         <img
-          [src]="data.imageUrl"
+          nz-image
+          [nzSrc]="data.imageUrl"
           alt="product"
-          class="w-20 h-20 object-cover rounded-md hover:scale-105 transition-transform duration-300"
+          width="200px"
+          height="200px"
+          class="w-20 h-20 object-cover rounded-md hover:scale-105 ease-in duration-300 hover:shadow-lg"
         />
       </td>
       <td>{{ data.name }}</td>

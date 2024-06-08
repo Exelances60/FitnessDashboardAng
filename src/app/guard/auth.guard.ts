@@ -27,7 +27,7 @@ export const authGuard: CanActivateFn = (
       return true;
     }),
     catchError((error) => {
-      messageService.error('You are not logged in');
+      messageService.error(error.error.errorMessage || 'You are not logged in');
       cookies.delete('token');
       return of(router.createUrlTree(['/auth/signin']));
     })
