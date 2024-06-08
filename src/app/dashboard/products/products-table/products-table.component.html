@@ -1,18 +1,30 @@
 <nz-table
   #productsTable
-  [nzData]="products"
+  [nzData]="displayData"
   [nzLoading]="isLoading"
   [nzPageSize]="5"
   [nzTotal]="totalProducts"
   class="w-full overflow-auto"
   nzTableLayout="auto"
-  (nzCurrentPageDataChange)="currentPageDataChange($event)"
 >
   <thead>
     <tr>
-      <th *ngFor="let column of listOfColumms">
-        {{ column.name }}
-      </th>
+      <ng-container *ngFor="let column of listOfColumms">
+        <th *ngIf="column.name !== 'Product\'s Name'; else elseBlock">
+          {{ column.name }}
+        </th>
+        <ng-template #elseBlock>
+          <th nzCustomFilter>
+            {{ column.name }}
+            <nz-filter-trigger
+              [(nzVisible)]="nameFilter"
+              [nzDropdownMenu]="menu"
+            >
+              <span nz-icon nzType="search"></span>
+            </nz-filter-trigger>
+          </th>
+        </ng-template>
+      </ng-container>
     </tr>
   </thead>
   <tbody>
@@ -45,3 +57,9 @@
     </tr>
   </tbody>
 </nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <app-table-search
+    (search)="onFilterByName($event)"
+    (reset)="onResetFilter($event)"
+  ></app-table-search>
+</nz-dropdown-menu>

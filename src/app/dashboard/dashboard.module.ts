@@ -13,6 +13,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ProductsTableComponent } from './products/products-table/products-table.component';
 import { SharedModule } from '../shared/shared.module';
 import { CurrencyCustomPipe } from '../pipes/currency.pipe';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CurrencyCustomPipe } from '../pipes/currency.pipe';
     NzTableModule,
     NzPaginationModule,
     SharedModule,
+    NzDropDownModule,
   ],
   providers: [CurrencyCustomPipe],
 })

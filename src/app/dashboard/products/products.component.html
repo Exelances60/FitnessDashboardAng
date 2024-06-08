@@ -5,14 +5,22 @@
       [text]="'Add Product'"
       [size]="'default'"
       [ghost]="true"
+      (click)="showModal()"
     ></app-button>
-    <app-modal [isVisible]="true" [customFooter]="true">
+    <app-modal
+      [isVisible]="modalVisible"
+      [customFooter]="true"
+      class="absolute"
+      (handleCancel)="closeModal()"
+    >
       <ng-container customTitle>
         <h1 class="text-lg font-bold">Add Product</h1>
       </ng-container>
       <ng-container customContent> asdasda </ng-container>
       <ng-container customFooter>
-        <button nz-button nzType="default">Cancel</button>
+        <button nz-button nzType="default" (click)="modalVisible = false">
+          Cancel
+        </button>
         <button nz-button nzType="primary">Save</button>
       </ng-container>
     </app-modal>

@@ -1,0 +1,29 @@
+<div
+  class="p-3 flex flex-col bg-white rounded-md shadow-md gap-3 border-dashed border border-gray-200"
+>
+  <nz-input-group nzSearch [nzAddOnAfter]="suffixIconButton">
+    <input
+      type="text"
+      nz-input
+      placeholder="Search product"
+      [(ngModel)]="searchValue"
+    />
+  </nz-input-group>
+  <ng-template #suffixIconButton>
+    <button nz-button nzType="primary" nzSearch (click)="onSearch()">
+      <span nz-icon nzType="search"></span>
+    </button>
+  </ng-template>
+  <div class="flex gap-2 justify-end">
+    <button
+      nz-button
+      nzSize="small"
+      nzType="primary"
+      class="search-button"
+      (click)="onSearch()"
+    >
+      Search
+    </button>
+    <button nz-button nzSize="small" (click)="onReset()">Reset</button>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { Product } from '../../interfaces/product-interface';
   styleUrl: './products.component.css',
 })
 export class ProductsComponent {
+  modalVisible = false;
   loading = false;
   datas = [] as Product[];
 
@@ -25,5 +26,12 @@ export class ProductsComponent {
   }
   onButtonClick() {
     console.log('Button clicked');
+  }
+  showModal() {
+    this.modalVisible = true;
+  }
+  closeModal() {
+    console.log('Modal closed');
+    this.modalVisible = false;
   }
 }

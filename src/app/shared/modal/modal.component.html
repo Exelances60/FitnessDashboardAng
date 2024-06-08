@@ -3,7 +3,7 @@
   [nzContent]="modalContent"
   [nzFooter]="modalFooter"
   [nzTitle]="modalTitle"
-  (nzOnCancel)="handleCancel()"
+  (nzOnCancel)="closeModal()"
 >
   <ng-template #modalTitle>
     <ng-content select="[customTitle]"> </ng-content>

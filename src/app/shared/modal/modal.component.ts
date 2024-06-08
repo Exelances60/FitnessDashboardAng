@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -9,5 +9,9 @@ export class ModalComponent {
   @Input() isVisible: boolean = false;
   @Input() customFooter = false;
   @Input() handleOk: () => void = () => {};
-  @Input() handleCancel: () => void = () => {};
+  @Output() handleCancel: EventEmitter<void> = new EventEmitter<void>();
+
+  closeModal() {
+    this.handleCancel.emit();
+  }
 }
