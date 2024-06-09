@@ -9,6 +9,8 @@ import {
   NzTableSortOrder,
 } from 'ng-zorro-antd/table';
 import { UserService } from '../../../services/user.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 interface ColumnItem {
   name: string;
@@ -28,6 +30,9 @@ interface ColumnItem {
   styleUrl: './products-table.component.css',
 })
 export class ProductsTableComponent {
+  editDrawerVisible = false;
+  editDrawerData!: Product;
+  deleteButtonLoading = false;
   categoryList: { text: string; value: string }[] = [];
   currency = '';
   listOfColumms: ColumnItem[] = [
@@ -58,7 +63,9 @@ export class ProductsTableComponent {
   constructor(
     private localStorageService: LocalStorageService,
     private productService: ProductService,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: NzMessageService,
+    private router: Router
   ) {
     this.localStorageService.$cureny.subscribe((currency) => {
       this.currency = currency;
@@ -91,5 +98,27 @@ export class ProductsTableComponent {
   }
   onResetFilter(name: string): void {
     this.onFilterByName('');
+  }
+
+  onDeleteProduct(id: string): void {
+    this.deleteButtonLoading = true;
+    this.productService.deleteProduct(id).subscribe({
+      complete: () => {
+        this.messageService.success('Product deleted successfully');
+        this.deleteButtonLoading = false;
+      },
+      error: (error) => {
+        this.messageService.error(error.error.errorMessage);
+        this.deleteButtonLoading = false;
+      },
+    });
+  }
+  onViewProduct(id: string): void {
+    this.router.navigate(['/dashboard/products/edit', id]);
+  }
+
+  onEditProduct(product: Product): void {
+    this.editDrawerData = product;
+    this.editDrawerVisible = true;
   }
 }

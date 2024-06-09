@@ -1,0 +1,10 @@
+<nz-drawer
+  [nzVisible]="visible"
+  [nzTitle]="title"
+  [nzPlacement]="placement === 'right' ? 'right' : 'left'"
+  (nzOnClose)="onCloseDrawer()"
+>
+  <ng-container *nzDrawerContent>
+    <ng-content #drawerContent></ng-content>
+  </ng-container>
+</nz-drawer>

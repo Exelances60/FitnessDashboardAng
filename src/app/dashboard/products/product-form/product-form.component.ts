@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Editor } from 'ngx-editor';
 import { UserService } from '../../../services/user.service';
 import { ProductService } from '../../../services/product.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Product } from '../../../interfaces/product-interface';
 
 @Component({
   selector: 'app-product-form',
@@ -11,6 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrl: './product-form.component.css',
 })
 export class ProductFormComponent {
+  @Input() product!: Product;
   productForm: FormGroup;
   categories: string[] = [];
   editor: Editor = new Editor();
@@ -37,6 +39,16 @@ export class ProductFormComponent {
     },
   };
 
+  private processFile(file: File): { fileUrl: string; file: File } {
+    const reader = new FileReader();
+    let fileData: { fileUrl: string; file: File } = { fileUrl: '', file: file };
+    reader.onload = (e: any) => {
+      fileData.fileUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+    return fileData;
+  }
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -53,6 +65,21 @@ export class ProductFormComponent {
     this.userService.$user.subscribe((user) => {
       this.categories = user?.productCategory || [];
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.product) {
+      this.productForm.patchValue({
+        productName: this.product.name,
+        description: this.product.description,
+        price: this.product.price,
+        amount: this.product.amount,
+        category: this.product.category,
+      });
+      this.imageList = [
+        { fileUrl: this.product.imageUrl, file: undefined as any },
+      ];
+    }
   }
 
   ngOnDestroy(): void {
@@ -82,6 +109,34 @@ export class ProductFormComponent {
       this.loading = false;
     }
   }
+
+  onUpdateProduct(): void {
+    this.loading = true;
+    if (this.productForm.valid) {
+      const formData = new FormData();
+      formData.append('name', this.productForm.value.productName);
+      formData.append('description', this.productForm.value.description);
+      formData.append('price', this.productForm.value.price);
+      formData.append('amount', this.productForm.value.amount);
+      formData.append('category', this.productForm.value.category);
+      if (this.imageList[0]?.file) {
+        formData.append('image', this.imageList[0].file);
+      }
+      this.productService.updateProduct(formData, this.product?._id).subscribe({
+        complete: () => {
+          this.loading = false;
+          this.messageService.success('Product updated successfully');
+        },
+        error: (error) => {
+          this.messageService.error(error.error.message);
+          this.loading = false;
+        },
+      });
+    } else {
+      this.productForm.markAllAsTouched();
+      this.loading = false;
+    }
+  }
   handleImageUpload(info: any): void {
     if (info.target.files !== this.imageList.map((img) => img.file)) {
       this.imageList = [];
@@ -90,7 +145,7 @@ export class ProductFormComponent {
     for (const file of files) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.imageList.push({ fileUrl: e.target.result, file });
+        this.imageList.push(this.processFile(file));
       };
       reader.readAsDataURL(file);
     }

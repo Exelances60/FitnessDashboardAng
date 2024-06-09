@@ -36,7 +36,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let data of productsTable.data">
-      <td>
+      <td class="cursor-pointer">
         <img
           nz-image
           [nzSrc]="data.imageUrl"
@@ -53,15 +53,35 @@
       <td>
         <div class="w-full flex items-center gap-2">
           <app-button
+            [text]="'View'"
+            [size]="'default'"
+            (onClick)="onViewProduct(data._id)"
+          >
+            <span nz-icon nzType="eye" icon></span>
+          </app-button>
+          <app-button
             [text]="'Edit'"
             [size]="'default'"
             [ghost]="true"
-          ></app-button>
-          <app-button
-            [text]="'Delete'"
-            [size]="'default'"
-            [danger]="true"
-          ></app-button>
+            (onClick)="onEditProduct(data)"
+          >
+            <span nz-icon nzType="edit" icon></span>
+          </app-button>
+          <app-pop-confirm-delete
+            [title]="'Are you sure you want to delete this product?'"
+            (confirm)="onDeleteProduct(data._id)"
+            [placement]="'topLeft'"
+          >
+            <app-button
+              [text]="'Delete'"
+              [size]="'default'"
+              [loading]="deleteButtonLoading"
+              [danger]="true"
+              [ghost]="true"
+            >
+              <span nz-icon nzType="delete" icon></span>
+            </app-button>
+          </app-pop-confirm-delete>
         </div>
       </td>
     </tr>
@@ -73,3 +93,14 @@
     (reset)="onResetFilter($event)"
   ></app-table-search>
 </nz-dropdown-menu>
+
+<app-drawer
+  [visible]="editDrawerVisible"
+  [title]="'Product Details'"
+  [placement]="'right'"
+  (close)="editDrawerVisible = false"
+>
+  <ng-container drawerContent *ngIf="editDrawerData">
+    <app-product-form [product]="editDrawerData"></app-product-form>
+  </ng-container>
+</app-drawer>

@@ -1,0 +1,12 @@
+<a
+  nz-popconfirm
+  nzPopconfirmTitle="{{ title }}"
+  [nzPopconfirmPlacement]="placement"
+  nzOkText="Yes"
+  nzOkType="primary"
+  nzCancelText="No"
+  (nzOnConfirm)="onConfirm()"
+  (nzOnCancel)="onCancel()"
+>
+  <ng-content></ng-content>
+</a>

@@ -6,8 +6,11 @@
   disabled="{{ disabled }}"
   [nzGhost]="ghost"
   [nzDanger]="danger"
-  (click)="onClick()"
+  (click)="onClickHandler()"
   class="rounded-lg shadow-sm"
 >
-  {{ text }}
+  <div>
+    <ng-content #icon></ng-content>
+    {{ text }}
+  </div>
 </button>

@@ -56,10 +56,49 @@ export class ProductService {
           observe: 'events',
         }
       )
+      .pipe(map((response) => this.handleProductEvent(response)));
+  }
+
+  deleteProduct(id: string) {
+    return this.http
+      .delete(`${environment.apiUrl}/products/delete-product/${id}`)
       .pipe(
-        map((response) => this.handleProductEvent(response)),
-        catchError((error) => {
-          return error;
+        map((value) => {
+          this.$products.next(
+            this.$products.value.filter((product) => product._id !== id)
+          );
+        })
+      );
+  }
+
+  getProduct(id: string) {
+    return this.http.get<AddProductResponse>(
+      `${environment.apiUrl}/products/get-product/${id}`
+    );
+  }
+
+  updateProduct(product: FormData, id: string) {
+    return this.http
+      .put<AddProductResponse>(
+        `${environment.apiUrl}/products/update-product/${id}`,
+        product,
+        {
+          reportProgress: true,
+          observe: 'events',
+        }
+      )
+      .pipe(
+        map((event) => {
+          if (event.type === HttpEventType.Response) {
+            if (event.body?.product) {
+              return this.$products.next(
+                this.$products.value.map((product) =>
+                  product._id === id ? event.body!.product : product
+                )
+              );
+            }
+          }
+          return null;
         })
       );
   }

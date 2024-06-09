@@ -3,7 +3,7 @@
   class="w-full max-w-lg mx-autobg-white rounded-lg"
   nz-form
   [nzAutoTips]="autoTip"
-  (ngSubmit)="onSubmit()"
+  (ngSubmit)="product ? onUpdateProduct() : onSubmit()"
 >
   <nz-form-item class="mb-4">
     <nz-form-control [nzAutoTips]="autoTipName" class="w-full">

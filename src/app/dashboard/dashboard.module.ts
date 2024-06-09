@@ -8,6 +8,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from '../shared/shared.module';
 import { CurrencyCustomPipe } from '../pipes/currency.pipe';
 import { NgxEditorModule } from 'ngx-editor';
+import { ProductEditComponent } from './products/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NgxEditorModule } from 'ngx-editor';
     ProductsTableComponent,
     CurrencyCustomPipe,
     ProductFormComponent,
+    ProductEditComponent,
   ],
   imports: [
     DashboardRoutingModule,

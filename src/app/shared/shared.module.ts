@@ -16,9 +16,19 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { PopConfirmDeleteComponent } from './pop-confirm-delete/pop-confirm-delete.component';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { DrawerComponent } from './drawer/drawer.component';
 
 @NgModule({
-  declarations: [ButtonComponent, ModalComponent, TableSearchComponent],
+  declarations: [
+    ButtonComponent,
+    ModalComponent,
+    TableSearchComponent,
+    PopConfirmDeleteComponent,
+    DrawerComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -35,6 +45,8 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzFormModule,
     NzSelectModule,
     NzUploadModule,
+    NzPopconfirmModule,
+    NzDrawerModule,
   ],
   exports: [
     ButtonComponent,
@@ -54,6 +66,9 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
     NzButtonModule,
     NzSelectModule,
     NzUploadModule,
+    PopConfirmDeleteComponent,
+    NzPopconfirmModule,
+    DrawerComponent,
   ],
 })
 export class SharedModule {}
