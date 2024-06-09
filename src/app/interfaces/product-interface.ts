@@ -13,3 +13,9 @@ export interface GetProductsResponse {
   message: string;
   products: Product[];
 }
+
+export interface AddProductResponse {
+  message: string;
+  product: Product;
+  status: number;
+}
