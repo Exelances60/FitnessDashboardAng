@@ -105,7 +105,7 @@ export class ProductFormComponent {
           },
         });
     } else {
-      this.productForm.markAllAsTouched();
+      this.productForm.markAsDirty();
       this.loading = false;
     }
   }

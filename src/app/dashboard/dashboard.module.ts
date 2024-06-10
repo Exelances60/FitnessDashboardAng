@@ -9,6 +9,8 @@ import { SharedModule } from '../shared/shared.module';
 import { CurrencyCustomPipe } from '../pipes/currency.pipe';
 import { NgxEditorModule } from 'ngx-editor';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
+import { CreateOrderFormComponent } from './products/create-order-form/create-order-form.component';
+import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,15 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
     CurrencyCustomPipe,
     ProductFormComponent,
     ProductEditComponent,
+    CreateOrderFormComponent,
   ],
+  providers: [CurrencyCustomPipe],
   imports: [
     DashboardRoutingModule,
     LayoutModule,
     SharedModule,
     NgxEditorModule,
+    SafeHtmlPipe,
   ],
-  providers: [CurrencyCustomPipe],
 })
 export class DashboardModule {}

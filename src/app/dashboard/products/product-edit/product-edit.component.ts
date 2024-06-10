@@ -18,6 +18,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
   ],
 })
 export class ProductEditComponent {
+  orderCreateVisible = false;
   currency = '';
   product: Product | undefined;
   constructor(
@@ -31,5 +32,9 @@ export class ProductEditComponent {
     this.localStorageService.$cureny.subscribe((currency) => {
       this.currency = currency;
     });
+  }
+
+  openOrderCreate() {
+    this.orderCreateVisible = true;
   }
 }
