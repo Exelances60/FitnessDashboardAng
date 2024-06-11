@@ -9,7 +9,7 @@ export class DashboardHomeComponent {
   navItems = [
     { name: 'Dashboard', link: '/dashboard', icon: 'dashboard' },
     { name: 'Products', link: '/dashboard/products', icon: 'shop' },
-    { name: 'Orders', link: '/orders', icon: 'shopping-cart' },
+    { name: 'Orders', link: '/dashboard/orders', icon: 'shopping-cart' },
   ];
 
   constructor() {}

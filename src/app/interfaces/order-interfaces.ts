@@ -32,3 +32,19 @@ export interface OrderResponse {
   message: string;
   status: number;
 }
+
+export interface OrderCardData {
+  increasePercentageForAmount: number;
+  increasePercentageForCompletedSales: number;
+  increasePercentageForSales: number;
+  totalOrders: number;
+  totalSalesCompleted: number;
+  totalSalesPrice: number;
+}
+
+export interface GetOrderResponse {
+  orders: Order[];
+  message: string;
+  status: number;
+  cardData: OrderCardData;
+}

@@ -20,6 +20,8 @@ import { PopConfirmDeleteComponent } from './pop-confirm-delete/pop-confirm-dele
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { DrawerComponent } from './drawer/drawer.component';
+import { CardComponent } from './card/card.component';
+import { CustomBadgeComponent } from './custom-badge/custom-badge.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { DrawerComponent } from './drawer/drawer.component';
     TableSearchComponent,
     PopConfirmDeleteComponent,
     DrawerComponent,
+    CardComponent,
+    CustomBadgeComponent,
   ],
   imports: [
     CommonModule,
@@ -69,6 +73,8 @@ import { DrawerComponent } from './drawer/drawer.component';
     PopConfirmDeleteComponent,
     NzPopconfirmModule,
     DrawerComponent,
+    CardComponent,
+    CustomBadgeComponent,
   ],
 })
 export class SharedModule {}

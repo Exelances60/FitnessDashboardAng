@@ -1,18 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OrderForm, OrderResponse } from '../interfaces/order-interfaces';
+import {
+  GetOrderResponse,
+  OrderForm,
+  OrderResponse,
+} from '../interfaces/order-interfaces';
 import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(
-    private http: HttpClient,
-    private productService: ProductService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   createOrder(order: OrderForm) {
     return this.http
@@ -22,5 +22,10 @@ export class OrderService {
           return response;
         })
       );
+  }
+  getOrders() {
+    return this.http.get<GetOrderResponse>(
+      `${environment.apiUrl}/orders/get-orders`
+    );
   }
 }

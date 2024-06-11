@@ -11,6 +11,9 @@ import { NgxEditorModule } from 'ngx-editor';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { CreateOrderFormComponent } from './products/create-order-form/create-order-form.component';
 import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
+import { OrderComponent } from './order/order.component';
+import { OrderCardsComponent } from './order/order-cards/order-cards.component';
+import { OrderTableComponent } from './order/order-table/order-table.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
     ProductFormComponent,
     ProductEditComponent,
     CreateOrderFormComponent,
+    OrderComponent,
+    OrderCardsComponent,
+    OrderTableComponent,
   ],
   providers: [CurrencyCustomPipe],
   imports: [

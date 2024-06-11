@@ -1,0 +1,66 @@
+<ng-container *ngIf="cardData">
+  <app-card class="lg:w-[550px] w-full">
+    <div class="flex flex-col gap-2 py-2 justify-center">
+      <div class="flex justify-between">
+        <p class="text-lg font-semibold">Total Orders</p>
+        <app-custom-badge
+          [status]="
+            cardData.increasePercentageForAmount > 0 && cardData
+              ? 'green'
+              : 'red'
+          "
+        >
+          {{ cardData.increasePercentageForAmount.toFixed(2) }}%
+        </app-custom-badge>
+      </div>
+      <div class="flex items-center gap-2">
+        <p class="text-3xl font-semibold">{{ cardData.totalOrders }}</p>
+        <p class="text-[#7b7b7b] font-semibold">Orders</p>
+      </div>
+    </div>
+  </app-card>
+  <app-card class="lg:w-[550px] w-full">
+    <div class="flex flex-col gap-2 py-2 justify-center">
+      <div class="flex justify-between">
+        <p class="text-lg font-semibold">Estimed Total Sales</p>
+        <app-custom-badge
+          [status]="
+            cardData.increasePercentageForSales > 0 && cardData
+              ? 'green'
+              : 'red'
+          "
+        >
+          {{ cardData.increasePercentageForSales.toFixed(2) }}%
+        </app-custom-badge>
+      </div>
+      <div class="flex items-center gap-2">
+        <p class="text-3xl font-semibold">
+          {{ cardData.totalSalesPrice | customCurrency : currency }}
+        </p>
+        <p class="text-[#7b7b7b] font-semibold"></p>
+      </div>
+    </div>
+  </app-card>
+  <app-card class="lg:w-[550px] w-full">
+    <div class="flex flex-col gap-2 py-2 justify-center">
+      <div class="flex justify-between">
+        <p class="text-lg font-semibold">Complated Orders</p>
+        <app-custom-badge
+          [status]="
+            cardData.increasePercentageForCompletedSales > 0 && cardData
+              ? 'green'
+              : 'red'
+          "
+        >
+          {{ cardData.increasePercentageForCompletedSales.toFixed(2) }}%
+        </app-custom-badge>
+      </div>
+      <div class="flex items-center gap-2">
+        <p class="text-3xl font-semibold">
+          {{ cardData.totalSalesCompleted | customCurrency : currency }}
+        </p>
+        <p class="text-[#7b7b7b] font-semibold"></p>
+      </div>
+    </div>
+  </app-card>
+</ng-container>

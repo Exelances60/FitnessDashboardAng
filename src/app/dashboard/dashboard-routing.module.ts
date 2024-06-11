@@ -4,6 +4,7 @@ import { DashboardHomeComponent } from './dashboard-home/dashboard-home.componen
 import { ProductsComponent } from './products/products.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { productResolver } from '../resolvers/product.resolver';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
         resolve: {
           product: productResolver,
         },
+      },
+      {
+        path: 'orders',
+        component: OrderComponent,
       },
     ],
   },
