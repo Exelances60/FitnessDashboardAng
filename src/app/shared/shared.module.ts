@@ -22,6 +22,7 @@ import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { DrawerComponent } from './drawer/drawer.component';
 import { CardComponent } from './card/card.component';
 import { CustomBadgeComponent } from './custom-badge/custom-badge.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CustomBadgeComponent } from './custom-badge/custom-badge.component';
     DrawerComponent,
     CardComponent,
     CustomBadgeComponent,
+    MapComponent,
   ],
   imports: [
     CommonModule,
@@ -75,6 +77,7 @@ import { CustomBadgeComponent } from './custom-badge/custom-badge.component';
     DrawerComponent,
     CardComponent,
     CustomBadgeComponent,
+    MapComponent,
   ],
 })
 export class SharedModule {}

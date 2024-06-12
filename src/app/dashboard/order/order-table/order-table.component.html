@@ -65,7 +65,11 @@
       <td>{{ data.createdAt }}</td>
       <td>
         <div class="w-full flex items-center gap-2">
-          <app-button [text]="'View'" [size]="'default'">
+          <app-button
+            [text]="'View'"
+            [size]="'default'"
+            (onClick)="openViewModal(data)"
+          >
             <span nz-icon nzType="eye"></span>
           </app-button>
           <app-button [text]="'Edit'" [size]="'default'" [ghost]="true">
@@ -97,12 +101,17 @@
   ></app-table-search>
 </nz-dropdown-menu>
 
-<app-modal [isVisible]="false" [customFooter]="true">
+<app-modal
+  [isVisible]="viewModal"
+  (handleCancel)="viewModal = false"
+  *ngIf="viewModal && selectedOrder"
+>
   <ng-container customTitle>
     <span>Order Details</span>
   </ng-container>
-  <ng-container customContent> asdasd </ng-container>
-  <ng-container customFooter>
-    <app-button [text]="'Close'" [size]="'default'"></app-button>
+  <ng-container customContent>
+    <app-order-view-modal
+      [selectedOrder]="selectedOrder"
+    ></app-order-view-modal>
   </ng-container>
 </app-modal>

@@ -24,7 +24,7 @@ interface ColumnItem {
 @Component({
   selector: 'app-order-table',
   templateUrl: './order-table.component.html',
-  styleUrl: './order-table.component.css',
+  styleUrls: ['./order-table.component.css'],
 })
 export class OrderTableComponent {
   @Input() loading = true;
@@ -35,6 +35,9 @@ export class OrderTableComponent {
   curency = '';
   allStatus: string[] = [];
   allCategory: { text: string; value: string }[] = [];
+  viewModal = false;
+  selectedOrder: Order | null = null;
+
   constructor(
     private localStorageService: LocalStorageService,
     private userService: UserService
@@ -42,15 +45,16 @@ export class OrderTableComponent {
     this.localStorageService.$cureny.subscribe((currecy) => {
       this.curency = currecy;
     });
-    this.displayData = this.orders;
     this.userService.$user.subscribe((user) => {
-      this.allCategory = user?.productCategory.map((category) => ({
-        text: category,
-        value: category,
-      })) as { text: string; value: string }[];
+      this.allCategory =
+        user?.productCategory.map((category) => ({
+          text: category,
+          value: category,
+        })) || [];
       this.updateCategoryFilter();
     });
   }
+
   listOfColumms: ColumnItem[] = [
     { name: 'Address' },
     {
@@ -60,7 +64,7 @@ export class OrderTableComponent {
     {
       name: 'Status',
       filterFn: (list: string[], item: Order) =>
-        list.some((status) => item.status.indexOf(status) !== -1),
+        list.some((status) => item.status.includes(status)),
       filterMultiple: false,
     },
     { name: 'Phone' },
@@ -76,17 +80,21 @@ export class OrderTableComponent {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['orders'] && changes['orders'].currentValue) {
       this.displayData = this.orders;
-      this.allStatus = this.orders.reduce((acc: string[], order: Order) => {
-        if (!acc.includes(order.status)) {
-          acc.push(order.status);
-        }
-        return acc;
-      }, []);
-      this.listOfColumms[2].listOfFilter = this.allStatus.map((status) => ({
-        text: status,
-        value: status,
-      }));
+      this.updateStatusFilter();
     }
+  }
+
+  updateStatusFilter(): void {
+    this.allStatus = this.orders.reduce((acc: string[], order: Order) => {
+      if (!acc.includes(order.status)) {
+        acc.push(order.status);
+      }
+      return acc;
+    }, []);
+    this.listOfColumms[2].listOfFilter = this.allStatus.map((status) => ({
+      text: status,
+      value: status,
+    }));
   }
 
   onFilterById(value: string): void {
@@ -96,6 +104,7 @@ export class OrderTableComponent {
         order.orderOwner.toLowerCase().includes(value.toLowerCase())
     );
   }
+
   onFilterByOwner(value: string): void {
     this.displayData = this.orders.filter((order: Order) =>
       order.orderOwner.toLowerCase().includes(value.toLowerCase())
@@ -111,7 +120,16 @@ export class OrderTableComponent {
       name: 'Category',
       listOfFilter: this.allCategory,
       filterFn: (list: string[], item: Order) =>
-        list.some((category) => item.orderCategory.indexOf(category) !== -1),
+        list.some((category) =>
+          item.orderCategory
+            ? item.orderCategory.includes(category)
+            : item.orderCategory.includes(category)
+        ),
     };
+  }
+
+  openViewModal(order: Order): void {
+    this.selectedOrder = order;
+    this.viewModal = true;
   }
 }

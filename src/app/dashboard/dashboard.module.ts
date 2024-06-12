@@ -14,6 +14,7 @@ import { SafeHtmlPipe } from '../pipes/safe-html.pipe';
 import { OrderComponent } from './order/order.component';
 import { OrderCardsComponent } from './order/order-cards/order-cards.component';
 import { OrderTableComponent } from './order/order-table/order-table.component';
+import { OrderViewModalComponent } from './order/order-view-modal/order-view-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { OrderTableComponent } from './order/order-table/order-table.component';
     OrderComponent,
     OrderCardsComponent,
     OrderTableComponent,
+    OrderViewModalComponent,
   ],
   providers: [CurrencyCustomPipe],
   imports: [
