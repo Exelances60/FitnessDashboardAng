@@ -24,7 +24,14 @@
         </nz-filter-trigger>
       </th>
 
-      <th *ngFor="let column of listOfColumms">
+      <th
+        *ngFor="let column of listOfColumms"
+        [nzSortFn]="$any(column.sortFn)"
+        [nzSortOrder]="$any(column.sortOrder)"
+        [nzSortDirections]="$any(column.sortDirections)"
+        [nzFilters]="$any(column.listOfFilter)"
+        [nzFilterFn]="$any(column.filterFn)"
+      >
         {{ column.name }}
       </th>
     </tr>
@@ -37,7 +44,9 @@
       <td class="cursor-pointer text-blue-500">{{ data._id }}</td>
       <td class="cursor-pointer text-blue-500">{{ data.orderOwner }}</td>
       <td>{{ data.adress }}</td>
-      <td class="text-green-500">{{ data.totalPrice }}</td>
+      <td class="text-green-500">
+        {{ data.totalPrice | customCurrency : curency }}
+      </td>
       <td>
         <app-custom-badge
           [status]="
@@ -51,24 +60,26 @@
           <span>{{ data.status }}</span>
         </app-custom-badge>
       </td>
-
       <td>{{ data.phone }}</td>
       <td>{{ data.orderCategory }}</td>
-
       <td>{{ data.createdAt }}</td>
-      <td class="flex gap-2">
-        <app-button [text]="'View'" [size]="'default'"></app-button>
-        <app-button
-          [text]="'Edit'"
-          [size]="'default'"
-          [ghost]="true"
-        ></app-button>
-        <app-button
-          [text]="'Delete'"
-          [size]="'default'"
-          [ghost]="true"
-          [danger]="true"
-        ></app-button>
+      <td>
+        <div class="w-full flex items-center gap-2">
+          <app-button [text]="'View'" [size]="'default'">
+            <span nz-icon nzType="eye"></span>
+          </app-button>
+          <app-button [text]="'Edit'" [size]="'default'" [ghost]="true">
+            <span nz-icon nzType="edit"></span>
+          </app-button>
+          <app-button
+            [text]="'Delete'"
+            [size]="'default'"
+            [ghost]="true"
+            [danger]="true"
+          >
+            <span nz-icon nzType="delete"></span>
+          </app-button>
+        </div>
       </td>
     </tr>
   </tbody>
@@ -85,3 +96,13 @@
     (reset)="onResetFilter()"
   ></app-table-search>
 </nz-dropdown-menu>
+
+<app-modal [isVisible]="false" [customFooter]="true">
+  <ng-container customTitle>
+    <span>Order Details</span>
+  </ng-container>
+  <ng-container customContent> asdasd </ng-container>
+  <ng-container customFooter>
+    <app-button [text]="'Close'" [size]="'default'"></app-button>
+  </ng-container>
+</app-modal>

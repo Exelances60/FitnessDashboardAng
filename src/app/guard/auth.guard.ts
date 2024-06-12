@@ -23,6 +23,10 @@ export const authGuard: CanActivateFn = (
 
   return jwtServices.verifyToken(token).pipe(
     map((response) => {
+      if (state.url === '/auth/signin' && response) {
+        messageService.success('You are logged in');
+        return router.createUrlTree(['/dashboard']);
+      }
       messageService.success('You are logged in');
       return true;
     }),
