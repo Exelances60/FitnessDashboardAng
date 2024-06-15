@@ -2,27 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Product } from '../../../interfaces/product-interface';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { ProductService } from '../../../services/product.service';
-import {
-  NzTableFilterFn,
-  NzTableFilterList,
-  NzTableSortFn,
-  NzTableSortOrder,
-} from 'ng-zorro-antd/table';
 import { UserService } from '../../../services/user.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
-
-interface ColumnItem {
-  name: string;
-  responsive?: string[];
-  customFilter?: boolean;
-  sortFn?: NzTableSortFn<Product> | null;
-  sortDirections?: NzTableSortOrder[] | null;
-  sortOrder?: NzTableSortOrder | null;
-  listOfFilter?: NzTableFilterList;
-  filterFn?: NzTableFilterFn<Product> | null;
-  filterMultiple?: boolean;
-}
+import { ColumnItem } from '../../../interfaces/user-interface';
 
 @Component({
   selector: 'app-products-table',
@@ -35,7 +18,7 @@ export class ProductsTableComponent {
   deleteButtonLoading = false;
   categoryList: { text: string; value: string }[] = [];
   currency = '';
-  listOfColumms: ColumnItem[] = [
+  listOfColumms: ColumnItem<Product>[] = [
     { name: 'Image' },
     { name: "Product's Name", customFilter: true },
     {

@@ -10,16 +10,13 @@
     <tr>
       <th nzCustomFilter>
         Order ID
-        <nz-filter-trigger [(nzVisible)]="idFilter" [nzDropdownMenu]="menu">
+        <nz-filter-trigger [nzDropdownMenu]="menu">
           <span nz-icon nzType="search"></span>
         </nz-filter-trigger>
       </th>
       <th nzCustomFilter>
         Order Owner
-        <nz-filter-trigger
-          [(nzVisible)]="orderOwnerFilter"
-          [nzDropdownMenu]="orderOwnerMenu"
-        >
+        <nz-filter-trigger [nzDropdownMenu]="orderOwnerMenu">
           <span nz-icon nzType="search"></span>
         </nz-filter-trigger>
       </th>
@@ -115,3 +112,5 @@
     ></app-order-view-modal>
   </ng-container>
 </app-modal>
+
+<app-drawer> </app-drawer>

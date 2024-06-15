@@ -1,25 +1,8 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { Order } from '../../../interfaces/order-interfaces';
-import {
-  NzTableFilterFn,
-  NzTableFilterList,
-  NzTableSortFn,
-  NzTableSortOrder,
-} from 'ng-zorro-antd/table';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { UserService } from '../../../services/user.service';
-
-interface ColumnItem {
-  name: string;
-  responsive?: string[];
-  customFilter?: boolean;
-  sortFn?: NzTableSortFn<Order> | null;
-  sortDirections?: NzTableSortOrder[] | null;
-  sortOrder?: NzTableSortOrder | null;
-  listOfFilter?: NzTableFilterList;
-  filterFn?: NzTableFilterFn<Order> | null;
-  filterMultiple?: boolean;
-}
+import { ColumnItem } from '../../../interfaces/user-interface';
 
 @Component({
   selector: 'app-order-table',
@@ -30,8 +13,6 @@ export class OrderTableComponent {
   @Input() loading = true;
   @Input() orders: Order[] = [];
   displayData: Order[] = [];
-  idFilter = false;
-  orderOwnerFilter = false;
   curency = '';
   allStatus: string[] = [];
   allCategory: { text: string; value: string }[] = [];
@@ -55,7 +36,7 @@ export class OrderTableComponent {
     });
   }
 
-  listOfColumms: ColumnItem[] = [
+  listOfColumms: ColumnItem<Order>[] = [
     { name: 'Address' },
     {
       name: 'Total Price',
