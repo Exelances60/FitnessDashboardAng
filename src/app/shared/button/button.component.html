@@ -10,7 +10,9 @@
   class="rounded-lg shadow-sm"
 >
   <div>
+    @if (!loading) {
     <ng-content #icon></ng-content>
     {{ text }}
+    }
   </div>
 </button>
