@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   GetOrderResponse,
   Order,
+  OrderCardData,
   OrderForm,
   OrderResponse,
   UpdateOrderResponse,
@@ -15,6 +16,7 @@ import { environment } from '../../environments/environment';
 })
 export class OrderService {
   $orders = new BehaviorSubject<Order[]>([]);
+  $cardData = new BehaviorSubject<OrderCardData | undefined>(undefined);
   constructor(private http: HttpClient) {}
 
   createOrder(order: OrderForm) {
@@ -32,6 +34,7 @@ export class OrderService {
       .pipe(
         map((response) => {
           this.$orders.next(response.orders);
+          this.$cardData.next(response.cardData);
           return response;
         })
       );
@@ -47,11 +50,28 @@ export class OrderService {
       })
       .pipe(
         map((response) => {
+          this.getOrders().subscribe();
           this.$orders.next(
             this.$orders.value.map((orderMap) =>
               orderMap._id === response.order._id ? response.order : orderMap
             )
           );
+          return response.message;
+        })
+      );
+  }
+
+  completeOrder(orderId: string) {
+    return this.http
+      .post<UpdateOrderResponse>(
+        `${environment.apiUrl}/orders/ordercompleted`,
+        {
+          orderId,
+        }
+      )
+      .pipe(
+        map((response) => {
+          this.getOrders().subscribe();
           return response.message;
         })
       );

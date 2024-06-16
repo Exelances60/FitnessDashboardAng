@@ -51,7 +51,11 @@
               ? 'green'
               : data.status === 'Preparing'
               ? 'blue'
-              : 'bg-red-500'
+              : data.status === 'Pending'
+              ? 'yellow-500'
+              : data.status === 'Cancelled'
+              ? 'bg-red-500'
+              : ''
           "
         >
           <span>{{ data.status }}</span>
@@ -77,7 +81,12 @@
           >
             <span nz-icon nzType="edit"></span>
           </app-button>
-          <app-button [text]="'Completed'" [size]="'default'" [ghost]="true">
+          <app-button
+            [text]="'Completed'"
+            [size]="'default'"
+            [ghost]="true"
+            (onClick)="completeOrder(data._id)"
+          >
             <span nz-icon nzType="check"></span>
           </app-button>
         </div>

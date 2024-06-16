@@ -120,4 +120,15 @@ export class OrderTableComponent {
     this.selectedOrder = order;
     this.modalState.edit = true;
   }
+
+  completeOrder(orderId: string): void {
+    this.orderService.completeOrder(orderId).subscribe({
+      next: (message) => {
+        console.log(message);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }
