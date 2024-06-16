@@ -1,5 +1,5 @@
 <div
-  class="px-3 py-1 rounded-xl text-center font-semibold"
+  class="px-3 py-[2px] rounded-xl text-center font-semibold"
   [ngClass]="{
     'bg-[#d3f3df]': status === 'green',
     'bg-yellow-500': status === 'bg-yellow-500',
@@ -7,7 +7,7 @@
     'bg-[#d4e2f9]': status === 'blue',
     'text-[#10b981]': status === 'green',
     'text-yellow-500': status === 'bg-yellow-500',
-    'text-red-500': status === 'bg-red-500',
+    'text-white': status === 'bg-red-500',
     'text-[#2563eb]': status === 'blue'
   }"
 >

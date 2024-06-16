@@ -1,7 +1,7 @@
 <div
-  class="bg-[#fff] rounded-lg shadow-md w-full p-4 flex flex-col gap-5 h-full"
+  class="bg-[#fff] rounded-lg shadow-md w-full p-4 flex flex-col h-full gap-5 overflow-auto"
 >
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center flex-col md:flex-row">
     <h1 class="text-lg font-bold">Products</h1>
     <app-button
       [text]="'Add Product'"
@@ -23,7 +23,6 @@
       </ng-container>
     </app-modal>
   </div>
-
   <app-products-table
     [products]="datas"
     [isLoading]="loading"

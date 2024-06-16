@@ -15,6 +15,8 @@ import { OrderComponent } from './order/order.component';
 import { OrderCardsComponent } from './order/order-cards/order-cards.component';
 import { OrderTableComponent } from './order/order-table/order-table.component';
 import { OrderViewModalComponent } from './order/order-view-modal/order-view-modal.component';
+import { OrderUpdateComponent } from './order/order-update/order-update.component';
+import { CurrencyPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,9 @@ import { OrderViewModalComponent } from './order/order-view-modal/order-view-mod
     OrderCardsComponent,
     OrderTableComponent,
     OrderViewModalComponent,
+    OrderUpdateComponent,
   ],
-  providers: [CurrencyCustomPipe],
+  providers: [CurrencyCustomPipe, CurrencyPipe],
   imports: [
     DashboardRoutingModule,
     LayoutModule,

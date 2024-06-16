@@ -9,7 +9,7 @@ import { LocalStorageService } from '../../../services/local-storage.service';
   styleUrl: './order-view-modal.component.css',
 })
 export class OrderViewModalComponent {
-  @Input() selectedOrder!: Order | null;
+  @Input() selectedOrder!: Order;
   selectedOrderProducts: Product[] = [];
   currency = '';
 

@@ -10,11 +10,9 @@ import { Order, OrderCardData } from '../../interfaces/order-interfaces';
 export class OrderComponent {
   loading = true;
   cardData: OrderCardData | undefined;
-  orders: Order[] = [];
   constructor(private orderService: OrderService) {
     this.orderService.getOrders().subscribe((response) => {
       this.loading = false;
-      this.orders = response.orders;
       this.cardData = response.cardData;
     });
   }

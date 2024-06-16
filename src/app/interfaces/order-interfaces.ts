@@ -33,6 +33,12 @@ export interface OrderResponse {
   status: number;
 }
 
+export interface UpdateOrderResponse {
+  order: Order;
+  message: string;
+  status: number;
+}
+
 export interface OrderCardData {
   increasePercentageForAmount: number;
   increasePercentageForCompletedSales: number;

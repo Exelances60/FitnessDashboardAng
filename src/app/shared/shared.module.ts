@@ -24,6 +24,7 @@ import { CardComponent } from './card/card.component';
 import { CustomBadgeComponent } from './custom-badge/custom-badge.component';
 import { MapComponent } from './map/map.component';
 import { UploadImageComponent } from './upload-image/upload-image.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     NzUploadModule,
     NzPopconfirmModule,
     NzDrawerModule,
+    LayoutModule,
   ],
   exports: [
     ButtonComponent,

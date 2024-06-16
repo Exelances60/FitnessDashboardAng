@@ -1,0 +1,150 @@
+<form
+  [formGroup]="updateForm"
+  class="w-full max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md"
+  nz-form
+  [nzAutoTips]="autopTip"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="flex justify-between mb-4">
+    <span class="font-bold text-gray-700">Order ID: {{ order._id }}</span>
+    <span class="text-gray-600">{{ order.createdAt | date : "short" }}</span>
+  </div>
+  <nz-form-item class="mb-4">
+    <nz-form-control class="w-full">
+      <nz-form-label
+        nzRequired
+        nzLabelAlign="left"
+        class="block text-gray-700 font-bold mb-2"
+        for="orderOwner"
+      >
+        Order Owner
+      </nz-form-label>
+      <nz-input-group nzAddOnBeforeIcon="user">
+        <input
+          type="text"
+          nz-input
+          formControlName="orderOwner"
+          placeholder="Order Owner"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-4">
+    <nz-form-control class="w-full">
+      <nz-form-label
+        nzRequired
+        nzLabelAlign="left"
+        class="block text-gray-700 font-bold mb-2"
+        for="adress"
+      >
+        Adress
+      </nz-form-label>
+      <nz-input-group nzAddOnBeforeIcon="home">
+        <input
+          type="text"
+          nz-input
+          formControlName="adress"
+          placeholder="Adress"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-4">
+    <nz-form-control class="w-full">
+      <nz-form-label
+        nzRequired
+        nzLabelAlign="left"
+        class="block text-gray-700 font-bold mb-2"
+        for="orderOwnerEmail"
+      >
+        Order Owner Email
+      </nz-form-label>
+      <nz-input-group nzAddOnBeforeIcon="mail">
+        <input
+          type="text"
+          nz-input
+          formControlName="orderOwnerEmail"
+          placeholder="Order Owner Email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <div class="flex justify-between gap-2">
+    <nz-form-item class="mb-4 w-full">
+      <nz-form-control class="w-full">
+        <nz-form-label
+          nzRequired
+          nzLabelAlign="left"
+          class="block text-gray-700 font-bold mb-2"
+          for="status"
+        >
+          Status
+        </nz-form-label>
+        <nz-select formControlName="status" nzPlaceHolder="Select a status">
+          <nz-option nzLabel="Pending" nzValue="Pending"></nz-option>
+          <nz-option nzLabel="Completed" nzValue="Completed"></nz-option>
+          <nz-option nzLabel="Cancelled" nzValue="Cancelled"></nz-option>
+          <nz-option nzLabel="Preparing" nzValue="Preparing"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mb-4 w-full">
+      <nz-form-control class="w-full">
+        <nz-form-label
+          nzRequired
+          nzLabelAlign="left"
+          class="block text-gray-700 font-bold mb-2"
+          for="amount"
+        >
+          Amount
+        </nz-form-label>
+        <nz-input-group nzAddOnBeforeIcon="field-binary">
+          <input
+            type="number"
+            nz-input
+            formControlName="amount"
+            placeholder="Amount"
+            class="w-full border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <nz-form-item class="mb-4">
+    <nz-form-control class="w-full">
+      <nz-form-label
+        nzRequired
+        nzLabelAlign="left"
+        class="block text-gray-700 font-bold mb-2"
+        for="totalPrice"
+      >
+        Total Price
+      </nz-form-label>
+      <nz-input-group nzAddOnBeforeIcon="dollar">
+        <input
+          type="text"
+          nz-input
+          (input)="commaConverter($event, 'totalPrice')"
+          formControlName="totalPrice"
+          placeholder="Total Price"
+          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item class="mb-4 w-full">
+    <nz-form-control class="w-full">
+      <button
+        class="w-full bg-indigo-500 text-white h-[34px] rounded-md focus:outline-none focus:ring-1 focus:ring-indigo-600 transition duration-150"
+        nzType="primary"
+        nzSize="large"
+        type="submit"
+      >
+        Update Order
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-drawer',
@@ -8,10 +9,26 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DrawerComponent {
   @Input() visible = false;
   @Input() title = '';
-  @Input() width = 720;
   @Input() onClose = () => {};
   @Input() placement = 'right';
   @Output() close = new EventEmitter<void>();
+  width = 600;
+  constructor(private breakpointObserver: BreakpointObserver) {
+    this.breakpointObserver
+      .observe(['(max-width: 768px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.width = 550;
+        }
+      });
+    this.breakpointObserver
+      .observe(['(max-width: 576px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.width = 360;
+        }
+      });
+  }
 
   onCloseDrawer(): void {
     this.close.emit();

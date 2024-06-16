@@ -1,8 +1,9 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Order } from '../../../interfaces/order-interfaces';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { UserService } from '../../../services/user.service';
 import { ColumnItem } from '../../../interfaces/user-interface';
+import { OrderService } from '../../../services/order.service';
 
 @Component({
   selector: 'app-order-table',
@@ -11,21 +12,24 @@ import { ColumnItem } from '../../../interfaces/user-interface';
 })
 export class OrderTableComponent {
   @Input() loading = true;
-  @Input() orders: Order[] = [];
-  displayData: Order[] = [];
+
+  orders: Order[] = [];
   curency = '';
+  displayData: Order[] = [];
   allStatus: string[] = [];
   allCategory: { text: string; value: string }[] = [];
-  viewModal = false;
   selectedOrder: Order | null = null;
+  modalState = { view: false, edit: false };
 
   constructor(
     private localStorageService: LocalStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private orderService: OrderService
   ) {
     this.localStorageService.$cureny.subscribe((currecy) => {
       this.curency = currecy;
     });
+
     this.userService.$user.subscribe((user) => {
       this.allCategory =
         user?.productCategory.map((category) => ({
@@ -33,6 +37,11 @@ export class OrderTableComponent {
           value: category,
         })) || [];
       this.updateCategoryFilter();
+    });
+    this.orderService.$orders.subscribe((orders) => {
+      this.orders = orders;
+      this.displayData = [...orders];
+      this.updateStatusFilter();
     });
   }
 
@@ -58,15 +67,8 @@ export class OrderTableComponent {
     { name: 'Action' },
   ];
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['orders'] && changes['orders'].currentValue) {
-      this.displayData = this.orders;
-      this.updateStatusFilter();
-    }
-  }
-
   updateStatusFilter(): void {
-    this.allStatus = this.orders.reduce((acc: string[], order: Order) => {
+    this.allStatus = this.displayData.reduce((acc: string[], order: Order) => {
       if (!acc.includes(order.status)) {
         acc.push(order.status);
       }
@@ -111,6 +113,11 @@ export class OrderTableComponent {
 
   openViewModal(order: Order): void {
     this.selectedOrder = order;
-    this.viewModal = true;
+    this.modalState.view = true;
+  }
+
+  openEditModal(order: Order): void {
+    this.selectedOrder = order;
+    this.modalState.edit = true;
   }
 }

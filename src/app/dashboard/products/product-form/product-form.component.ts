@@ -81,7 +81,13 @@ export class ProductFormComponent {
     if (this.productForm.valid) {
       const image = this.imageList[0]?.file;
       this.productService
-        .addProductWithImage(this.productForm.value, image)
+        .addProductWithImage(
+          {
+            ...this.productForm.value,
+            price: this.productForm.value.price.replace(/,/g, ''),
+          },
+          image
+        )
         .subscribe({
           complete: () => {
             this.productForm.reset();
@@ -106,7 +112,7 @@ export class ProductFormComponent {
       const formData = new FormData();
       formData.append('name', this.productForm.value.productName);
       formData.append('description', this.productForm.value.description);
-      formData.append('price', this.productForm.value.price);
+      formData.append('price', this.productForm.value.price.replace(/,/g, ''));
       formData.append('amount', this.productForm.value.amount);
       formData.append('category', this.productForm.value.category);
       if (this.imageList[0]?.file) {
@@ -118,7 +124,7 @@ export class ProductFormComponent {
           this.messageService.success('Product updated successfully');
         },
         error: (error) => {
-          this.messageService.error(error.error.message);
+          this.messageService.error(error.error.errorMessage);
           this.loading = false;
         },
       });
@@ -126,5 +132,26 @@ export class ProductFormComponent {
       this.productForm.markAllAsTouched();
       this.loading = false;
     }
+  }
+
+  commaConverter(event: Event, key: string): void {
+    let value;
+    let val = (event.target as HTMLInputElement).value;
+    val = val.replace(/,/g, '');
+    if (val.length > 3) {
+      let noCommas = Math.ceil(val.length / 3) - 1;
+      let remain = val.length - noCommas * 3;
+      let newVal = [];
+      for (let i = 0; i < noCommas; i++) {
+        newVal.unshift(val.substr(val.length - i * 3 - 3, 3));
+      }
+      newVal.unshift(val.substr(0, remain));
+      value = newVal;
+    } else {
+      value = val;
+    }
+    this.productForm.patchValue({
+      [key]: value.toString(),
+    });
   }
 }

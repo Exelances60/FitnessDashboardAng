@@ -32,15 +32,15 @@
         {{ column.name }}
       </th>
     </tr>
-
-    <tr></tr>
   </thead>
 
   <tbody>
     <tr *ngFor="let data of orderTable.data">
       <td class="cursor-pointer text-blue-500">{{ data._id }}</td>
       <td class="cursor-pointer text-blue-500">{{ data.orderOwner }}</td>
-      <td>{{ data.adress }}</td>
+      <td>
+        {{ data.adress }}
+      </td>
       <td class="text-green-500">
         {{ data.totalPrice | customCurrency : curency }}
       </td>
@@ -69,16 +69,16 @@
           >
             <span nz-icon nzType="eye"></span>
           </app-button>
-          <app-button [text]="'Edit'" [size]="'default'" [ghost]="true">
-            <span nz-icon nzType="edit"></span>
-          </app-button>
           <app-button
-            [text]="'Delete'"
+            [text]="'Edit'"
             [size]="'default'"
             [ghost]="true"
-            [danger]="true"
+            (onClick)="openEditModal(data)"
           >
-            <span nz-icon nzType="delete"></span>
+            <span nz-icon nzType="edit"></span>
+          </app-button>
+          <app-button [text]="'Completed'" [size]="'default'" [ghost]="true">
+            <span nz-icon nzType="check"></span>
           </app-button>
         </div>
       </td>
@@ -99,18 +99,21 @@
 </nz-dropdown-menu>
 
 <app-modal
-  [isVisible]="viewModal"
-  (handleCancel)="viewModal = false"
-  *ngIf="viewModal && selectedOrder"
+  [isVisible]="modalState.view"
+  (handleCancel)="modalState.view = false"
 >
   <ng-container customTitle>
     <span>Order Details</span>
   </ng-container>
-  <ng-container customContent>
+  <ng-container customContent *ngIf="selectedOrder">
     <app-order-view-modal
       [selectedOrder]="selectedOrder"
     ></app-order-view-modal>
   </ng-container>
 </app-modal>
 
-<app-drawer> </app-drawer>
+<app-drawer [visible]="modalState.edit" (close)="modalState.edit = false">
+  <ng-container drawerContent *ngIf="selectedOrder">
+    <app-order-update [order]="selectedOrder" />
+  </ng-container>
+</app-drawer>

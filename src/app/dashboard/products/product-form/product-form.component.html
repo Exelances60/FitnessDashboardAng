@@ -42,8 +42,9 @@
       >
       <nz-input-group class="rounded-lg">
         <input
-          type="number"
+          type="text"
           nz-input
+          (input)="commaConverter($event, 'price')"
           formControlName="price"
           id="price"
           placeholder="Price"
@@ -101,11 +102,10 @@
   <nz-form-item class="mb-4">
     <nz-form-control class="w-full">
       <button
-        nz-button
         nzType="primary"
         type="submit"
-        [nzLoading]="loading"
-        class="w-full bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
+        [disabled]="loading"
+        class="w-full h-[34px] bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600"
       >
         Add Product
       </button>
